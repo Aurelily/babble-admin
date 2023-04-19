@@ -1,0 +1,39 @@
+@import url("../../variables.css");
+
+/* ------------------
+HEADER
+--------------------*/
+
+.header-main {
+  height: 100%;
+  /* background-color: var(--orange-primary); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.header-connected {
+  width: 100vw;
+  /*  background-color: var(--orange-primary); */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.logo-main {
+  height: 25vh;
+}
+.logo-connected {
+  height: 50px;
+}
+.btDeco {
+  border: none;
+  background: none;
+}
+.btDeco img {
+  height: 50px;
+}
+.btDeco:hover {
+  cursor: pointer;
+}

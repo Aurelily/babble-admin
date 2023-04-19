@@ -1,0 +1,16 @@
+@import url("../src/variables.css");
+
+/* ------------------
+GLOBAL
+--------------------*/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--purple-third);
+  background-image: url("/public/images/header-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
