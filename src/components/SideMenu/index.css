@@ -1,0 +1,29 @@
+@import url("../../variables.css");
+
+/* ------------------
+SIDE MENU
+--------------------*/
+.side-menu {
+  width: 15vw;
+  height: 100vh;
+  background-color: var(--purple-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+}
+.logo-side {
+  height: 20vh;
+  margin-bottom: 100px;
+}
+.btDeco {
+  border: none;
+  background: none;
+}
+.btDeco img {
+  height: 50px;
+}
+.btDeco:hover {
+  cursor: pointer;
+}

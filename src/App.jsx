@@ -1,21 +1,33 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Outlet } from "react-router-dom";
 import "./App.css";
 
-// Install package : npm install react-router-dom, and import here
-/* import { BrowserRouter as Router, Switch, Route } from "react-router-dom"; */
-
 // import component
+import SideMenu from "./components/SideMenu/SideMenu";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import LoginScreen from "./Screens/LoginScreen/LoginScreen";
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <div>
+function App({ children }) {
+  // states
+  const [isConnected, setIsConnected] = useState(true);
+  return isConnected ? (
+    <>
+      <main>
+        <SideMenu />
+        <div className="container">
+          <Outlet />
+        </div>
+      </main>
+    </>
+  ) : (
+    <>
       <Header />
-    </div>
+      <main>
+        <LoginScreen />
+      </main>
+      <Footer />
+    </>
   );
 }
 
