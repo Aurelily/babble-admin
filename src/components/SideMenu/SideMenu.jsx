@@ -10,11 +10,12 @@ function SideMenu({
   isConnected,
   setIsConnected,
   setUserId,
+  tokenCookie,
   Cookies,
 }) {
   function disconnect() {
     console.log("Déconnexion");
-    if (isConnected) {
+    if (tokenCookie) {
       //on supprime le cookie du user en cours pour se déconnecter
       Cookies.remove("userToken");
       setUserToken(null);

@@ -20,7 +20,9 @@ function App() {
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
 
-  return isConnected ? (
+  const tokenCookie = Cookies.get("userToken");
+
+  return tokenCookie ? (
     <>
       <main>
         <SideMenu
@@ -28,10 +30,11 @@ function App() {
           setIsConnected={setIsConnected}
           setUserToken={setUserToken}
           setUserId={setUserId}
+          tokenCookie={tokenCookie}
           Cookies={Cookies}
         />
         <div className="container">
-          <Outlet avatarPath={avatarPath} />
+          <Outlet avatarPath={avatarPath} url={url} userToken={userToken} />
         </div>
       </main>
     </>
