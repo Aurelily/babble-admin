@@ -3,3 +3,59 @@
 /* ------------------
 LOGIN SCREEN
 --------------------*/
+
+.form-container {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form-container form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert {
+  color: var(--purple-primary);
+}
+
+/* ------------------
+MY INPUT 
+--------------------*/
+
+.my-input {
+  background-color: var(--orange-primary);
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: white;
+  border: none;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
+}

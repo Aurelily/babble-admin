@@ -5,14 +5,28 @@ import { Link } from "react-router-dom";
 //components
 import MyButton from "../MyButton/MyButton";
 
-function SideMenu() {
-  function handleClick() {
-    console.log("OK");
+function SideMenu({
+  setUserToken,
+  isConnected,
+  setIsConnected,
+  setUserId,
+  Cookies,
+}) {
+  function disconnect() {
+    console.log("Déconnexion");
+    if (isConnected) {
+      //on supprime le cookie du user en cours pour se déconnecter
+      Cookies.remove("userToken");
+      setUserToken(null);
+      Cookies.remove("userId");
+      setUserId(null);
+      setIsConnected(false);
+    }
   }
 
   return (
     <nav className="side-menu">
-      <button className="btDeco" onClick={handleClick}>
+      <button className="btDeco" onClick={disconnect}>
         <img src="/public/images/bt-deco.png" alt="Deconnexion" />
       </button>
       <img
@@ -21,10 +35,10 @@ function SideMenu() {
         alt="babble"
       />
       <Link to={`users`}>
-        <MyButton action={handleClick} text="Utilisateurs" color="btPurple" />
+        <MyButton text="Utilisateurs" color="btPurple" />
       </Link>
       <Link to={`rooms`}>
-        <MyButton action={handleClick} text="Salons" color="btOrange" />
+        <MyButton text="Salons" color="btOrange" />
       </Link>
     </nav>
   );
