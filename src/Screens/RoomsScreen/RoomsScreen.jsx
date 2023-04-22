@@ -1,37 +1,75 @@
 import "./index.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 // components
 
 function RoomsScreen() {
-  return (
+  const [rooms, setRooms] = useState([]);
+  const [roomsLoading, setRoomsLoading] = useState(true);
+
+  const url = "https://api.aureliepreaud.me/";
+  const avatarPath = "http://design-dev.net/projet-babble/avatars/";
+  const tokenCookie = Cookies.get("userToken");
+
+  // To get Rooms list
+  useEffect(() => {
+    async function fetchGroups() {
+      try {
+        await fetch(`${url}rooms`, {
+          headers: {
+            Authorization: `Bearer ${tokenCookie}`,
+          },
+        }).then((response) => {
+          response.json().then((data) => {
+            if (data.status == 200) {
+              setRooms(data.data);
+              setRoomsLoading(false);
+            }
+          });
+        });
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
+
+    fetchGroups();
+  }, []);
+
+  return !roomsLoading ? (
     <div className="main-container">
       <h1>Tableau de bord de gestion des salons de discussions</h1>
-      <table class="room-table">
+      <table className="room-table">
         <thead>
           <th>ID</th>
           <th>Nom du salon</th>
+          <th>Créateur</th>
           <th>Mode privé</th>
-          <th>Nb. messages</th>
           <th>Crée le</th>
-          <th>Dernier message le</th>
           <th></th>
         </thead>
         <tbody>
-          <tr>
-            <td>642d30e66cfdfd935f7eb2a4</td>
-            <td>Name</td>
-            <td>Privé</td>
-            <td>10</td>
-            <td>10/04/2023</td>
-            <td>10/04/2023</td>
-            <td>
-              <img src="/public/images/bt-trash.png" alt="delete" />
-            </td>
-          </tr>
+          {rooms.map((room) => {
+            return (
+              <tr>
+                <td>{room._id}</td>
+                <td>{room.name}</td>
+                <td>
+                  {room.creator.firstname} {room.creator.lastname}
+                </td>
+                <td>{room.privateCode}</td>
+                <td>{room.dateCreation}</td>
+                <td>
+                  <img src="/public/images/bt-trash.png" alt="delete" />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
+  ) : (
+    <div className="main-container">Loading...</div>
   );
 }
 

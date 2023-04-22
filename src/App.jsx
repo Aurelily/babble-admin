@@ -11,9 +11,6 @@ import LoginScreen from "./Screens/LoginScreen/LoginScreen";
 //Après avoir installé le package via le Terminal : npm install js-cookie, je l'importe ici
 import Cookies from "js-cookie";
 
-const url = "https://api.aureliepreaud.me/";
-const avatarPath = "http://design-dev.net/projet-babble/avatars/";
-
 function App() {
   // states
   const [isConnected, setIsConnected] = useState(false);
@@ -22,19 +19,26 @@ function App() {
 
   const tokenCookie = Cookies.get("userToken");
 
+  const url = "https://api.aureliepreaud.me/";
+
+  const handleDisconnect = async (event) => {
+    console.log("Déconnexion");
+    if (tokenCookie) {
+      //on supprime le cookie du user en cours pour se déconnecter
+      Cookies.remove("userToken");
+      setUserToken(null);
+      Cookies.remove("userId");
+      setUserId(null);
+      setIsConnected(false);
+    }
+  };
+
   return tokenCookie ? (
     <>
       <main>
-        <SideMenu
-          isConnected={isConnected}
-          setIsConnected={setIsConnected}
-          setUserToken={setUserToken}
-          setUserId={setUserId}
-          tokenCookie={tokenCookie}
-          Cookies={Cookies}
-        />
+        <SideMenu handleDisconnect={handleDisconnect} />
         <div className="container">
-          <Outlet avatarPath={avatarPath} url={url} userToken={userToken} />
+          <Outlet />
         </div>
       </main>
     </>
@@ -45,9 +49,7 @@ function App() {
         <div className="container">
           <LoginScreen
             url={url}
-            userId={userId}
             setUserId={setUserId}
-            userToken={userToken}
             setUserToken={setUserToken}
             setIsConnected={setIsConnected}
             Cookies={Cookies}

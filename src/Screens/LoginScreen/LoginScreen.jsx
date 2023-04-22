@@ -1,9 +1,6 @@
 import "./index.css";
 import React, { useState } from "react";
 
-/* //Après avoir installé le package via le Terminal : npm install js-cookie, je l'importe ici
-import Cookies from "js-cookie"; */
-
 // jwt-decode library to decode jwtToken
 import jwtDecode from "jwt-decode";
 
@@ -12,10 +9,8 @@ import MyButton from "../../components/MyButton/MyButton";
 
 function LoginScreen({
   url,
-  userToken,
   setUserToken,
   setIsConnected,
-  userId,
   setUserId,
   Cookies,
 }) {

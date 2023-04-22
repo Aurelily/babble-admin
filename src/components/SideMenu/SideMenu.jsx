@@ -5,29 +5,10 @@ import { Link } from "react-router-dom";
 //components
 import MyButton from "../MyButton/MyButton";
 
-function SideMenu({
-  setUserToken,
-  isConnected,
-  setIsConnected,
-  setUserId,
-  tokenCookie,
-  Cookies,
-}) {
-  function disconnect() {
-    console.log("Déconnexion");
-    if (tokenCookie) {
-      //on supprime le cookie du user en cours pour se déconnecter
-      Cookies.remove("userToken");
-      setUserToken(null);
-      Cookies.remove("userId");
-      setUserId(null);
-      setIsConnected(false);
-    }
-  }
-
+function SideMenu({ handleDisconnect }) {
   return (
     <nav className="side-menu">
-      <button className="btDeco" onClick={disconnect}>
+      <button className="btDeco" onClick={handleDisconnect}>
         <img src="/public/images/bt-deco.png" alt="Deconnexion" />
       </button>
       <img
