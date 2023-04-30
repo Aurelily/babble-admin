@@ -14,7 +14,7 @@ function RoomsScreen() {
 
   // To get Rooms list
   useEffect(() => {
-    async function fetchGroups() {
+    async function fetchAllRooms() {
       try {
         await fetch(`${url}rooms`, {
           headers: {
@@ -33,7 +33,7 @@ function RoomsScreen() {
       }
     }
 
-    fetchGroups();
+    fetchAllRooms();
   }, []);
 
   return !roomsLoading ? (

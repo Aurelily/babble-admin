@@ -1,0 +1,40 @@
+@import url("../../variables.css");
+
+/* ------------------
+USER DETAIL SCREEN
+--------------------*/
+
+.user-detail-table {
+  border-collapse: collapse;
+  border: 1px solid white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.user-detail-table th,
+.user-detail-table td {
+  border-collapse: collapse;
+  border: 1px solid white;
+  padding: 20px;
+}
+
+.user-detail-table th {
+  background-color: var(--purple-primary);
+  color: white;
+}
+.user-detail-table td {
+  background-color: #e5dafa;
+  color: var(--purple-primary);
+}
+
+.main-container-details img {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.main-container-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

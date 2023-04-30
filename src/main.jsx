@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
 import UsersScreen from "./Screens/UsersScreen/UsersScreen";
+import UserDetailScreen from "./Screens/UserDetailScreen/UserDetailScreen";
 import RoomsScreen from "./Screens/RoomsScreen/RoomsScreen";
 import ErrorPage from "./error-page";
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <UsersScreen />,
+      },
+      {
+        path: "/users/details/:id",
+        element: <UserDetailScreen />,
       },
       {
         path: "/rooms",

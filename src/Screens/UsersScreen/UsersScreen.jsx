@@ -1,6 +1,7 @@
 import "./index.css";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 function UsersScreen() {
   //States
@@ -12,7 +13,6 @@ function UsersScreen() {
   const tokenCookie = Cookies.get("userToken");
 
   // To get user list
-
   useEffect(() => {
     console.log(tokenCookie);
     async function fetchUsers() {
@@ -43,6 +43,7 @@ function UsersScreen() {
       <table className="user-table">
         <thead>
           <tr>
+            <th>Infos</th>
             <th>ID</th>
             <th>Prénom</th>
             <th>Nom</th>
@@ -56,6 +57,11 @@ function UsersScreen() {
           {usersList.map((user) => {
             return (
               <tr>
+                <td>
+                  <Link to={`/users/details/${user._id}`}>
+                    <img src="/public/images/bt-infos.png" alt="infos" />
+                  </Link>
+                </td>
                 <td>{user._id}</td>
                 <td>{user.firstname}</td>
                 <td>{user.lastname}</td>
