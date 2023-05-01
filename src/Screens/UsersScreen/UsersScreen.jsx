@@ -13,6 +13,26 @@ function UsersScreen() {
   const avatarPath = "http://design-dev.net/projet-babble/avatars/";
   const tokenCookie = Cookies.get("userToken");
 
+  // Function to Delete a user
+  async function deleteUser(userIdToDelete) {
+    try {
+      const response = await fetch(`${url}users/delete/${userIdToDelete}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${tokenCookie}`,
+        },
+      });
+
+      if (response.ok) {
+        console.log("User deleted successfully");
+      } else {
+        console.log("Error deleting room");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // To get user list
   useEffect(() => {
     console.log(tokenCookie);
@@ -62,7 +82,7 @@ function UsersScreen() {
             );
             if (user.isAdmin === false) {
               return (
-                <tr>
+                <tr key={user._id}>
                   <td>
                     <Link to={`/users/details/${user._id}`}>
                       <img src="/public/images/bt-infos.png" alt="infos" />
@@ -76,8 +96,16 @@ function UsersScreen() {
                     <img src={`${avatarPath}${user.avatarPath}`} alt="avatar" />
                   </td>
                   <td>{date}</td>
-                  <td>
-                    <img src="/public/images/bt-trash.png" alt="delete" />
+                  <td className="form-delete">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        deleteUser(user._id);
+                        window.location.reload();
+                      }}
+                    >
+                      <img src="/public/images/bt-trash.png" alt="delete" />
+                    </button>
                   </td>
                 </tr>
               );

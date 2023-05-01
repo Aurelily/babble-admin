@@ -95,7 +95,7 @@ function UserDetailScreen() {
           {rooms.map((room) => {
             if (room.creator._id === userInfos._id)
               return (
-                <tr>
+                <tr key={room._id}>
                   <td>{room.name}</td>
 
                   <RoomMessagesCount id={room._id} />

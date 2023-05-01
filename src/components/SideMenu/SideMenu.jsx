@@ -8,7 +8,14 @@ import MyButton from "../MyButton/MyButton";
 function SideMenu({ handleDisconnect }) {
   return (
     <nav className="side-menu">
-      <button className="btDeco" onClick={handleDisconnect}>
+      <button
+        className="btDeco"
+        type="button"
+        onClick={() => {
+          handleDisconnect();
+          window.location.reload();
+        }}
+      >
         <img src="/public/images/bt-deco.png" alt="Deconnexion" />
       </button>
       <img

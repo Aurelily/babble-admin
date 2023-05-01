@@ -11,7 +11,6 @@ function RoomsScreen() {
   const [roomsLoading, setRoomsLoading] = useState(true);
 
   const url = "https://api.aureliepreaud.me/";
-  const avatarPath = "http://design-dev.net/projet-babble/avatars/";
   const tokenCookie = Cookies.get("userToken");
 
   // Function to Delete a room
@@ -20,9 +19,7 @@ function RoomsScreen() {
       const response = await fetch(`${url}rooms/delete/${roomIdToDelete}`, {
         method: "DELETE",
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + tokenCookie,
+          Authorization: `Bearer ${tokenCookie}`,
         },
       });
 
@@ -65,13 +62,15 @@ function RoomsScreen() {
       <h1>Tableau de bord de gestion des salons de discussions</h1>
       <table className="room-table">
         <thead>
-          <th>ID</th>
-          <th>Nom du salon</th>
-          <th>Créateur</th>
-          <th>Mode privé</th>
-          <th>Nombre de messages</th>
-          <th>Crée le</th>
-          <th></th>
+          <tr>
+            <th>ID</th>
+            <th>Nom du salon</th>
+            <th>Créateur</th>
+            <th>Mode privé</th>
+            <th>Nombre de messages</th>
+            <th>Crée le</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
           {rooms.map((room) => {
@@ -79,7 +78,7 @@ function RoomsScreen() {
               "DD/MM/YYYY  à  HH:mm:ss"
             );
             return (
-              <tr>
+              <tr key={room._id}>
                 <td>{room._id}</td>
                 <td>{room.name}</td>
                 <td>
@@ -88,16 +87,16 @@ function RoomsScreen() {
                 <td>{room.privateCode}</td>
                 <RoomMessagesCount id={room._id} />
                 <td>{date}</td>
-                <td>
-                  <form
-                    key={room._id}
-                    className="form-delete"
-                    onSubmit={() => deleteRoom(room._id)}
+                <td className="form-delete">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      deleteRoom(room._id);
+                      window.location.reload();
+                    }}
                   >
-                    <button type="submit">
-                      <img src="/public/images/bt-trash.png" alt="delete" />
-                    </button>
-                  </form>
+                    <img src="/public/images/bt-trash.png" alt="delete" />
+                  </button>
                 </td>
               </tr>
             );
