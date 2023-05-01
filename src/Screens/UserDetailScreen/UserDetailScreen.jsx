@@ -70,7 +70,14 @@ function UserDetailScreen() {
 
   return !userInfosLoading && !roomsLoading ? (
     <div className="main-container-details">
-      <img src={`${avatarPath}${userInfos.avatarPath}`} alt="avatar" />
+      <Link to={`/users`}>
+        <img className="buttons" src="/public/images/bt-back.png" alt="back" />
+      </Link>
+      <img
+        className="avatar-detail"
+        src={`${avatarPath}${userInfos.avatarPath}`}
+        alt="avatar"
+      />
       <h1>
         {userInfos.firstname} {userInfos.lastname}
       </h1>

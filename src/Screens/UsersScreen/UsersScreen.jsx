@@ -2,6 +2,7 @@ import "./index.css";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 function UsersScreen() {
   //States
@@ -15,6 +16,7 @@ function UsersScreen() {
   // To get user list
   useEffect(() => {
     console.log(tokenCookie);
+
     async function fetchUsers() {
       try {
         await fetch(`${url}users`, {
@@ -55,26 +57,31 @@ function UsersScreen() {
         </thead>
         <tbody>
           {usersList.map((user) => {
-            return (
-              <tr>
-                <td>
-                  <Link to={`/users/details/${user._id}`}>
-                    <img src="/public/images/bt-infos.png" alt="infos" />
-                  </Link>
-                </td>
-                <td>{user._id}</td>
-                <td>{user.firstname}</td>
-                <td>{user.lastname}</td>
-                <td>{user.email}</td>
-                <td>
-                  <img src={`${avatarPath}${user.avatarPath}`} alt="avatar" />
-                </td>
-                <td>{user.dateCreation}</td>
-                <td>
-                  <img src="/public/images/bt-trash.png" alt="delete" />
-                </td>
-              </tr>
+            const date = moment(user.dateCreation).format(
+              "DD/MM/YYYY à HH:mm:ss"
             );
+            if (user.isAdmin === false) {
+              return (
+                <tr>
+                  <td>
+                    <Link to={`/users/details/${user._id}`}>
+                      <img src="/public/images/bt-infos.png" alt="infos" />
+                    </Link>
+                  </td>
+                  <td>{user._id}</td>
+                  <td>{user.firstname}</td>
+                  <td>{user.lastname}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <img src={`${avatarPath}${user.avatarPath}`} alt="avatar" />
+                  </td>
+                  <td>{date}</td>
+                  <td>
+                    <img src="/public/images/bt-trash.png" alt="delete" />
+                  </td>
+                </tr>
+              );
+            }
           })}
         </tbody>
       </table>

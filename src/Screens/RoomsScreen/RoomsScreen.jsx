@@ -1,6 +1,7 @@
 import "./index.css";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import moment from "moment";
 
 // components
 
@@ -50,6 +51,9 @@ function RoomsScreen() {
         </thead>
         <tbody>
           {rooms.map((room) => {
+            const date = moment(room.dateCreation).format(
+              "DD/MM/YYYY  à  HH:mm:ss"
+            );
             return (
               <tr>
                 <td>{room._id}</td>
@@ -58,7 +62,7 @@ function RoomsScreen() {
                   {room.creator.firstname} {room.creator.lastname}
                 </td>
                 <td>{room.privateCode}</td>
-                <td>{room.dateCreation}</td>
+                <td>{date}</td>
                 <td>
                   <img src="/public/images/bt-trash.png" alt="delete" />
                 </td>

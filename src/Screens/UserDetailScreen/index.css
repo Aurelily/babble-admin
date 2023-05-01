@@ -27,8 +27,13 @@ USER DETAIL SCREEN
   color: var(--purple-primary);
 }
 
-.main-container-details img {
+.avatar-detail {
   width: 150px;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  width: 50px;
   margin-bottom: 20px;
 }
 
