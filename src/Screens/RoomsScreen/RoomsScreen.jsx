@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import moment from "moment";
 
 // components
+import RoomMessagesCount from "../../components/RoomMessagesCount/RoomMessagesCount";
 
 function RoomsScreen() {
   const [rooms, setRooms] = useState([]);
@@ -12,6 +13,28 @@ function RoomsScreen() {
   const url = "https://api.aureliepreaud.me/";
   const avatarPath = "http://design-dev.net/projet-babble/avatars/";
   const tokenCookie = Cookies.get("userToken");
+
+  // Function to Delete a room
+  async function deleteRoom(roomIdToDelete) {
+    try {
+      const response = await fetch(`${url}rooms/delete/${roomIdToDelete}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + tokenCookie,
+        },
+      });
+
+      if (response.ok) {
+        console.log("Room deleted successfully");
+      } else {
+        console.log("Error deleting room");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // To get Rooms list
   useEffect(() => {
@@ -46,6 +69,7 @@ function RoomsScreen() {
           <th>Nom du salon</th>
           <th>Créateur</th>
           <th>Mode privé</th>
+          <th>Nombre de messages</th>
           <th>Crée le</th>
           <th></th>
         </thead>
@@ -62,9 +86,18 @@ function RoomsScreen() {
                   {room.creator.firstname} {room.creator.lastname}
                 </td>
                 <td>{room.privateCode}</td>
+                <RoomMessagesCount id={room._id} />
                 <td>{date}</td>
                 <td>
-                  <img src="/public/images/bt-trash.png" alt="delete" />
+                  <form
+                    key={room._id}
+                    className="form-delete"
+                    onSubmit={() => deleteRoom(room._id)}
+                  >
+                    <button type="submit">
+                      <img src="/public/images/bt-trash.png" alt="delete" />
+                    </button>
+                  </form>
                 </td>
               </tr>
             );

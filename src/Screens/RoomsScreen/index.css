@@ -35,3 +35,7 @@ ROOMS SCREEN
   align-items: center;
   justify-content: center;
 }
+.form-delete button {
+  border: none;
+  background-color: transparent;
+}
