@@ -9,7 +9,10 @@ function UsersScreen() {
   const [usersList, setUsersList] = useState([]);
   const [usersLoading, setUsersLoading] = useState(true);
 
-  const url = "https://api.aureliepreaud.me/";
+  // variable URL
+  const url = `http://${import.meta.env.VITE_SERVER_IP}:3000/`;
+  // const url = "https://api.aureliepreaud.me/";
+
   const avatarPath = "http://design-dev.net/projet-babble/avatars/";
   const tokenCookie = Cookies.get("userToken");
 
@@ -72,7 +75,7 @@ function UsersScreen() {
             <th>Email</th>
             <th>Avatar</th>
             <th>Inscrit le</th>
-            <th></th>
+            <th>Bannir</th>
           </tr>
         </thead>
         <tbody>

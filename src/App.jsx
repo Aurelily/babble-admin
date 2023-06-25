@@ -19,7 +19,9 @@ function App() {
 
   const tokenCookie = Cookies.get("userToken");
 
-  const url = "https://api.aureliepreaud.me/";
+  // variable URL
+  const url = `http://${import.meta.env.VITE_SERVER_IP}:3000/`;
+  // const url = "https://api.aureliepreaud.me/";
 
   const handleDisconnect = async (event) => {
     console.log("Déconnexion");

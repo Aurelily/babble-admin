@@ -10,7 +10,10 @@ function RoomsScreen() {
   const [rooms, setRooms] = useState([]);
   const [roomsLoading, setRoomsLoading] = useState(true);
 
-  const url = "https://api.aureliepreaud.me/";
+  // variable URL
+  const url = `http://${import.meta.env.VITE_SERVER_IP}:3000/`;
+  // const url = "https://api.aureliepreaud.me/";
+
   const tokenCookie = Cookies.get("userToken");
 
   // Function to Delete a room

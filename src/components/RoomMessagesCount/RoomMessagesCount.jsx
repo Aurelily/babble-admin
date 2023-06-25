@@ -6,7 +6,10 @@ function RoomMessagesCount(props) {
 
   // Function to get number of messages by room id
   async function fetchMessagesCountByRoomId(roomId) {
-    const url = "https://api.aureliepreaud.me/";
+    // variable URL
+    const url = `http://${import.meta.env.VITE_SERVER_IP}:3000/`;
+    // const url = "https://api.aureliepreaud.me/";
+
     const tokenCookie = Cookies.get("userToken");
     try {
       const response = await fetch(`${url}messages/room/${roomId}`, {
